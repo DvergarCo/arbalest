@@ -1,0 +1,33 @@
+#VRML_SIM R2019a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.32798264389204107 0.93715941839405 0.11899415876803451 0.6836002597166995
+  position 2.950537734693975 1.4771837001814774 4.273616449234259
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 4 4
+  floorTileSize 1 1
+}
+Robot {
+  translation 0 0.1 0
+  children [
+    DEF LEFT_TRACK Track {
+      name "track(1)"
+    }
+    DEF RIGHT_TRACK Track {
+    }
+    DEF BODY Shape {
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+  }
+}
