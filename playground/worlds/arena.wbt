@@ -2,26 +2,150 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.32798264389204107 0.93715941839405 0.11899415876803451 0.6836002597166995
-  position 2.950537734693975 1.4771837001814774 4.273616449234259
+  orientation -0.9973274667720462 0.06222899843687409 0.038281533088379824 0.9162762069610153
+  position 0.2333291436129269 2.5186343844513424 3.3015265988893905
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  translation 0 -0.12000000000000002 0
   floorSize 4 4
   floorTileSize 1 1
 }
 Robot {
-  translation 0 0.1 0
+  translation 0 0.1 0.8100000000000003
   children [
-    DEF LEFT_TRACK Track {
-      name "track(1)"
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
     }
-    DEF RIGHT_TRACK Track {
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
     }
     DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
       geometry Box {
         size 0.2 0.1 0.30000000000000004
       }
@@ -30,4 +154,5 @@ Robot {
   boundingObject USE BODY
   physics Physics {
   }
+  controller "4wheel_diff_drive"
 }
