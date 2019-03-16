@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.9973274667720462 0.06222899843687409 0.038281533088379824 0.9162762069610153
-  position 0.2333291436129269 2.5186343844513424 3.3015265988893905
+  orientation -0.9998157051274481 -0.018455460151519273 0.005286943455271098 0.5919823499388991
+  position -0.08809420972912108 3.3172675887229857 5.528712749632438
 }
 TexturedBackground {
 }
@@ -13,6 +13,23 @@ RectangleArena {
   translation 0 -0.12000000000000002 0
   floorSize 4 4
   floorTileSize 1 1
+}
+Solid {
+  children [
+    DEF BALL Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  boundingObject USE BALL
+  physics Physics {
+  }
 }
 Robot {
   translation 0 0.1 0.8100000000000003
