@@ -3,7 +3,12 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.9998157051274481 -0.018455460151519273 0.005286943455271098 0.5919823499388991
-  position -0.08809420972912108 3.3172675887229857 5.528712749632438
+  position -0.08953830727316148 3.389214504718993 5.635731587535482
+}
+DEF sv Robot {
+  name "robot(1)"
+  controller "movement_supervisor"
+  supervisor TRUE
 }
 TexturedBackground {
 }
@@ -31,7 +36,7 @@ Solid {
   physics Physics {
   }
 }
-Robot {
+DEF kedi Robot {
   translation 0 0.1 0.8100000000000003
   children [
     DEF FL Transform {
