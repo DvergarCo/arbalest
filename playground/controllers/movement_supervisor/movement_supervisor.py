@@ -15,7 +15,7 @@ subject = sv.getFromDef("kedi"); # note that kedi is the DEF value, not name!
 # - perform simulation steps until Webots is stopping the controller
 while sv.step(timestep) != -1:
     position=subject.getPosition()
-    print(position)
+    #print(position)
 
 
 # Enter here exit cleanup code.

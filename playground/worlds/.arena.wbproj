@@ -8,4 +8,4 @@ centralWidgetVisible: 1
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 1 "controllers/4wheel_diff_drive/4wheel_diff_drive.py" "controllers/movement_supervisor/movement_supervisor.py"
+textFiles: 2 "controllers/4wheel_diff_drive/4wheel_diff_drive.py" "controllers/movement_supervisor/movement_supervisor.py" "controllers/spawner/spawner.py"

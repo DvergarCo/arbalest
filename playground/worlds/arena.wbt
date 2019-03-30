@@ -5,6 +5,13 @@ Viewpoint {
   orientation -0.9998157051274481 -0.018455460151519273 0.005286943455271098 0.5919823499388991
   position -0.08953830727316148 3.389214504718993 5.635731587535482
 }
+DEF BALLS Group {
+}
+DEF spawner Robot {
+  name "robot(2)"
+  controller "spawner"
+  supervisor TRUE
+}
 DEF sv Robot {
   name "robot(1)"
   controller "movement_supervisor"
@@ -18,23 +25,6 @@ RectangleArena {
   translation 0 -0.12000000000000002 0
   floorSize 4 4
   floorTileSize 1 1
-}
-Solid {
-  children [
-    DEF BALL Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 1 0.3333333333333333 0
-        }
-      }
-      geometry Sphere {
-        radius 0.1
-      }
-    }
-  ]
-  boundingObject USE BALL
-  physics Physics {
-  }
 }
 DEF kedi Robot {
   translation 0 0.1 0.8100000000000003
