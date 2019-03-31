@@ -1,0 +1,18 @@
+#VRML_OBJ R2019a utf8
+Solid {
+  children [
+    DEF BALL Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  boundingObject USE BALL
+  physics Physics {
+  }
+}

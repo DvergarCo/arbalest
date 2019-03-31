@@ -1,0 +1,177 @@
+#VRML_SIM R2019a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.9998157051274481 -0.018455460151519273 0.005286943455271098 0.5919823499388991
+  position -0.08722875063980672 3.274149232449999 5.464575512938649
+}
+DEF BALLS Group {
+}
+DEF spawner Robot {
+  name "robot(2)"
+  controller "spawner"
+  supervisor TRUE
+}
+DEF sv Robot {
+  name "robot(1)"
+  controller "movement_supervisor"
+  supervisor TRUE
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 -0.12000000000000002 0
+  floorSize 4 4
+  floorTileSize 1 1
+}
+DEF kedi Robot {
+  translation 0 0.1 0.8100000000000003
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+}
+DEF CHECKPOINTS Group {
+}
+DEF checkpoint_handler Robot {
+  name "robot(3)"
+  controller "checkpoint_handler"
+  supervisor TRUE
+}
