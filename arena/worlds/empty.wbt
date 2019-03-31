@@ -1,0 +1,275 @@
+#VRML_SIM R2019a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.4968513975237701 0.8403863259539172 0.216539862215604 0.909808242825684
+  position 5.471822246361642 3.9076941177920403 5.715394127745519
+}
+TexturedBackground {
+  texture "noon_park_empty"
+}
+TexturedBackgroundLight {
+}
+DEF kedi Robot {
+  translation 0 0.1 0.8100000000000003
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  name "robot(1)"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+}
+DEF BALLS Group {
+}
+DEF ARENA Group {
+  children [
+    DEF WALLS Group {
+      children [
+        Wall {
+          translation 1.5 0.15 -1.55
+          name "wall(4)"
+          size 1 0.1 0.1
+          appearance Roughcast {
+            colorOverride 1 0 0
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+        Wall {
+          translation -1.55 0.15 1.5
+          rotation 0 1 0 1.5707963220000003
+          name "wall(5)"
+          size 1 0.1 0.1
+          appearance Roughcast {
+            colorOverride 0 0 1
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+        Wall {
+          translation 0.9999999999886623 0 -1.7500067342093553
+          rotation 0 1 0 1.5707996938995747
+          size 0.5 0.5 0.02
+        }
+        Wall {
+          translation -1.75 0 1
+          name "wall(1)"
+          size 0.5 0.5 0.02
+        }
+        Wall {
+          translation -1.5 0 -1.75
+          name "wall(2)"
+          size 1 0.5 0.5
+        }
+        Wall {
+          translation -1.75 0 -1.5
+          rotation 0 1 0 1.5707996938995747
+          name "wall(3)"
+          size 1 0.5 0.5
+        }
+      ]
+    }
+    RectangleArena {
+      floorSize 4 4
+      floorAppearance CarpetFibers {
+        colorOverride 0.6666666666666666 0.6666666666666666 0.4980392156862745
+      }
+    }
+  ]
+}
+DEF SV_BALL Robot {
+  translation 0.1 0 0.1
+  controller "ball_supervisor"
+  supervisor TRUE
+}
+DEF CONVEYOR Robot {
+  children [
+    DEF REDTRACK Track {
+      translation 1.5 0 -0.1
+      rotation 0 1 0 -1.5708
+      children [
+        DEF BELT Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0.39215686274509803 0.39215686274509803
+            }
+          }
+          geometry Box {
+            size 3 0.01 0.3
+          }
+        }
+      ]
+      name "track(1)"
+      boundingObject USE BELT
+      physics Physics {
+      }
+      device [
+        LinearMotor {
+          name "redbeltmotor"
+        }
+      ]
+    }
+    DEF BLUETRACK Track {
+      translation -0.1 0 1.5
+      children [
+        DEF BELT Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.39215686274509803 0.39215686274509803 1
+            }
+          }
+          geometry Box {
+            size 3 0.01 0.3
+          }
+        }
+      ]
+      name "track(2)"
+      boundingObject USE BELT
+      physics Physics {
+      }
+      device [
+        LinearMotor {
+          name "bluebeltmotor"
+        }
+      ]
+    }
+  ]
+  name "robot(2)"
+  controller "belt_controller"
+}

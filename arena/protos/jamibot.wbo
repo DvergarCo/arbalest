@@ -1,0 +1,143 @@
+#VRML_OBJ R2019a utf8
+DEF kedi Robot {
+  translation 0 0.1 0.8100000000000003
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+}

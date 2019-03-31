@@ -1,0 +1,5 @@
+#VRML_OBJ R2019a utf8
+Ball {
+  translation 0 0.17250000000000001 0
+  radius 0.036
+}
