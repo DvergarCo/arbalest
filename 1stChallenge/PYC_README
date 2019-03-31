@@ -1,0 +1,5 @@
+The python file can be compiled as follows;
+import py_compile
+py_compile.compile("controller.py") # a file can compile itself!
+
+However, webots expects a .py file and doesn't accept the pyc. The trick? Just rename pyc->py :)
