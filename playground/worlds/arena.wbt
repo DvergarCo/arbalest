@@ -27,13 +27,15 @@ RectangleArena {
   floorTileSize 1 1
 }
 DEF kedi Robot {
-  translation 0 0.1 0.8100000000000003
+  translation 1.1654867155529442e-08 -0.02150893423958159 0.8100000000000002
+  rotation -6.125916553204496e-10 1.1409348169774579e-08 -1 1.1728583709991654e-07
   children [
     DEF FL Transform {
       translation -0.125 -0.049999999999999996 -0.1
       children [
         HingeJoint {
           jointParameters HingeJointParameters {
+            position 1.7084075016511911e-15
           }
           device [
             RotationalMotor {
@@ -41,7 +43,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            rotation 9.817706721347995e-16 -8.443906894796103e-16 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -64,6 +66,7 @@ DEF kedi Robot {
       children [
         HingeJoint {
           jointParameters HingeJointParameters {
+            position -2.9899208635885977e-16
           }
           device [
             RotationalMotor {
@@ -71,7 +74,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            rotation -2.1925742313644518e-17 1.59309104525415e-16 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -95,6 +98,7 @@ DEF kedi Robot {
       children [
         HingeJoint {
           jointParameters HingeJointParameters {
+            position 5.98718238649009e-16
           }
           device [
             RotationalMotor {
@@ -102,7 +106,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            rotation 4.26927908850517e-16 -2.8954605797851934e-16 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -126,6 +130,7 @@ DEF kedi Robot {
       children [
         HingeJoint {
           jointParameters HingeJointParameters {
+            position -5.683613601543201e-16
           }
           device [
             RotationalMotor {
@@ -133,7 +138,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            rotation -1.5660992571486726e-16 2.9399374142314514e-16 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -167,11 +172,6 @@ DEF kedi Robot {
   physics Physics {
   }
   controller "4wheel_diff_drive"
-}
-DEF CHECKPOINTS Group {
-}
-DEF checkpoint_handler Robot {
-  name "robot(3)"
-  controller "checkpoint_handler"
-  supervisor TRUE
+  linearVelocity -4.3887349831588144e-16 2.27373675443232e-16 -5.894089995204338e-16
+  angularVelocity 4.263255975871477e-16 1.246780571674491e-15 8.526512829121206e-16
 }
