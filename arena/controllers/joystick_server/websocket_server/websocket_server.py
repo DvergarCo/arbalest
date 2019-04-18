@@ -5,7 +5,7 @@ import sys
 import struct
 from base64 import b64encode
 from hashlib import sha1
-import logging
+#import logging
 from socket import error as SocketError
 import errno
 
@@ -14,8 +14,8 @@ if sys.version_info[0] < 3:
 else:
     from socketserver import ThreadingMixIn, TCPServer, StreamRequestHandler
 
-logger = logging.getLogger(__name__)
-logging.basicConfig()
+# logger = logging.get#logger(__name__)
+# logging.basicConfig()
 
 '''
 +-+-+-+-+-------+-+-------------+-------------------------------+
@@ -33,7 +33,7 @@ logging.basicConfig()
 +---------------------------------------------------------------+
 '''
 
-FIN    = 0x80
+FIN = 0x80
 OPCODE = 0x0f
 MASKED = 0x80
 PAYLOAD_LEN = 0x7f
@@ -41,11 +41,11 @@ PAYLOAD_LEN_EXT16 = 0x7e
 PAYLOAD_LEN_EXT64 = 0x7f
 
 OPCODE_CONTINUATION = 0x0
-OPCODE_TEXT         = 0x1
-OPCODE_BINARY       = 0x2
-OPCODE_CLOSE_CONN   = 0x8
-OPCODE_PING         = 0x9
-OPCODE_PONG         = 0xA
+OPCODE_TEXT = 0x1
+OPCODE_BINARY = 0x2
+OPCODE_CLOSE_CONN = 0x8
+OPCODE_PING = 0x9
+OPCODE_PONG = 0xA
 
 
 # -------------------------------- API ---------------------------------
@@ -54,13 +54,13 @@ class API():
 
     def run_forever(self):
         try:
-            logger.info("Listening on port %d for clients.." % self.port)
+            #logger.info("Listening on port %d for clients.." % self.port)
             self.serve_forever()
         except KeyboardInterrupt:
             self.server_close()
-            logger.info("Server terminated.")
+            #logger.info("Server terminated.")
         except Exception as e:
-            logger.error(str(e), exc_info=True)
+            #logger.error(str(e), exc_info=True)
             exit(1)
 
     def new_client(self, client, server):
@@ -92,7 +92,7 @@ class API():
 
 class WebsocketServer(ThreadingMixIn, TCPServer, API):
     """
-	A websocket server waiting for clients to connect.
+        A websocket server waiting for clients to connect.
 
     Args:
         port(int): Port to bind to
@@ -118,8 +118,8 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
     clients = []
     id_counter = 0
 
-    def __init__(self, port, host='127.0.0.1', loglevel=logging.WARNING):
-        logger.setLevel(loglevel)
+    def __init__(self, port, host='0.0.0.0'):
+        # logger.setLevel(loglevel)
         TCPServer.__init__(self, (host, port), WebSocketHandler)
         self.port = self.socket.getsockname()[1]
 
@@ -193,7 +193,7 @@ class WebSocketHandler(StreamRequestHandler):
             b1, b2 = self.read_bytes(2)
         except SocketError as e:  # to be replaced with ConnectionResetError for py3
             if e.errno == errno.ECONNRESET:
-                logger.info("Client closed connection.")
+                #logger.info("Client closed connection.")
                 print("Error: {}".format(e))
                 self.keep_alive = 0
                 return
@@ -201,24 +201,24 @@ class WebSocketHandler(StreamRequestHandler):
         except ValueError as e:
             b1, b2 = 0, 0
 
-        fin    = b1 & FIN
+        fin = b1 & FIN
         opcode = b1 & OPCODE
         masked = b2 & MASKED
         payload_length = b2 & PAYLOAD_LEN
 
         if opcode == OPCODE_CLOSE_CONN:
-            logger.info("Client asked to close connection.")
+            #logger.info("Client asked to close connection.")
             self.keep_alive = 0
             return
         if not masked:
-            logger.warn("Client must always be masked.")
+            #logger.warn("Client must always be masked.")
             self.keep_alive = 0
             return
         if opcode == OPCODE_CONTINUATION:
-            logger.warn("Continuation frames are not supported.")
+            #logger.warn("Continuation frames are not supported.")
             return
         elif opcode == OPCODE_BINARY:
-            logger.warn("Binary frames are not supported.")
+            #logger.warn("Binary frames are not supported.")
             return
         elif opcode == OPCODE_TEXT:
             opcode_handler = self.server._message_received_
@@ -227,7 +227,7 @@ class WebSocketHandler(StreamRequestHandler):
         elif opcode == OPCODE_PONG:
             opcode_handler = self.server._pong_received_
         else:
-            logger.warn("Unknown opcode %#x." % opcode)
+            # logger.warn("Unknown opcode %#x." % opcode)
             self.keep_alive = 0
             return
 
@@ -257,19 +257,20 @@ class WebSocketHandler(StreamRequestHandler):
 
         # Validate message
         if isinstance(message, bytes):
-            message = try_decode_UTF8(message)  # this is slower but ensures we have UTF-8
+            # this is slower but ensures we have UTF-8
+            message = try_decode_UTF8(message)
             if not message:
-                logger.warning("Can\'t send message, message is not valid UTF-8")
+                #logger.warning("Can\'t send message, message is not valid UTF-8")
                 return False
-        elif sys.version_info < (3,0) and (isinstance(message, str) or isinstance(message, unicode)):
+        elif sys.version_info < (3, 0) and (isinstance(message, str) or isinstance(message, unicode)):
             pass
         elif isinstance(message, str):
             pass
         else:
-            logger.warning('Can\'t send message, message has to be a string or bytes. Given type is %s' % type(message))
+            #logger.warning('Can\'t send message, message has to be a string or bytes. Given type is %s' % type(message))
             return False
 
-        header  = bytearray()
+        header = bytearray()
         payload = encode_to_UTF8(message)
         payload_length = len(payload)
 
@@ -291,7 +292,8 @@ class WebSocketHandler(StreamRequestHandler):
             header.extend(struct.pack(">Q", payload_length))
 
         else:
-            raise Exception("Message is too big. Consider breaking it into chunks.")
+            raise Exception(
+                "Message is too big. Consider breaking it into chunks.")
             return
 
         self.request.send(header + payload)
@@ -322,7 +324,7 @@ class WebSocketHandler(StreamRequestHandler):
         try:
             key = headers['sec-websocket-key']
         except KeyError:
-            logger.warning("Client tried to connect but was missing a key")
+            #logger.warning("Client tried to connect but was missing a key")
             self.keep_alive = False
             return
 
@@ -334,11 +336,11 @@ class WebSocketHandler(StreamRequestHandler):
     @classmethod
     def make_handshake_response(cls, key):
         return \
-          'HTTP/1.1 101 Switching Protocols\r\n'\
-          'Upgrade: websocket\r\n'              \
-          'Connection: Upgrade\r\n'             \
-          'Sec-WebSocket-Accept: %s\r\n'        \
-          '\r\n' % cls.calculate_response_key(key)
+            'HTTP/1.1 101 Switching Protocols\r\n'\
+            'Upgrade: websocket\r\n'              \
+            'Connection: Upgrade\r\n'             \
+            'Sec-WebSocket-Accept: %s\r\n'        \
+            '\r\n' % cls.calculate_response_key(key)
 
     @classmethod
     def calculate_response_key(cls, key):
@@ -355,7 +357,7 @@ def encode_to_UTF8(data):
     try:
         return data.encode('UTF-8')
     except UnicodeEncodeError as e:
-        logger.error("Could not encode data to UTF-8 -- %s" % e)
+        #logger.error("Could not encode data to UTF-8 -- %s" % e)
         return False
     except Exception as e:
         raise(e)

@@ -139,7 +139,7 @@ DEF kedi Robot {
     DEF BODY Shape {
       appearance Appearance {
         material Material {
-          diffuseColor 1 0.3333333333333333 0
+          diffuseColor 0.23215075913633937 0.6952925917448691 0.28946364538033115
         }
       }
       geometry Box {
@@ -152,6 +152,444 @@ DEF kedi Robot {
   physics Physics {
   }
   controller "4wheel_diff_drive"
+  synchronization FALSE
+  cpuConsumption 100
+}
+DEF kedi Robot {
+  translation 0.6000000000000003 0.1 0.7800000000000001
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.18359655146105136 0.22548256656748303 0.7072098878461891
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  name "robot(3)"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+  synchronization FALSE
+  cpuConsumption 100
+}
+DEF kedi Robot {
+  translation 0.7000000000000003 0.1 -0.1400000000000002
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7170366979476616 0.024582284275577935 0.09945830472266727
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  name "robot(4)"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+  controllerArgs "1"
+  synchronization FALSE
+  cpuConsumption 100
+}
+DEF kedi Robot {
+  translation 0.020000000000000025 0.1 -0.0400000000000002
+  children [
+    DEF FL Transform {
+      translation -0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF FR Transform {
+      translation 0.125 -0.049999999999999996 -0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "front_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RL Transform {
+      translation -0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_left"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RR Transform {
+      translation 0.125 -0.049999999999999996 0.1
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+              name "rear_right"
+            }
+          ]
+          endPoint Solid {
+            rotation 1.2756979749780655e-16 9.813061345985119e-18 1 1.5707996938995743
+            children [
+              DEF wheel Shape {
+                appearance Appearance {
+                }
+                geometry Cylinder {
+                  height 0.049999999999999996
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE wheel
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF BODY Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.3333333333333333 0
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.30000000000000004
+      }
+    }
+  ]
+  name "robot(5)"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "4wheel_diff_drive"
+  synchronization FALSE
+  cpuConsumption 100
 }
 DEF BALLS Group {
 }
@@ -272,4 +710,11 @@ DEF CONVEYOR Robot {
   ]
   name "robot(2)"
   controller "belt_controller"
+}
+DEF CONTROLLER_SERVER Robot {
+  name "robot(6)"
+  controller "joystick_server"
+  supervisor TRUE
+  synchronization FALSE
+  cpuConsumption 100
 }

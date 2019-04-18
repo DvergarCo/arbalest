@@ -3,55 +3,55 @@ import nipplejs from "nipplejs";
 import JoyStick from "./Joystick";
 
 // keep constant sending speed for webots
-const SEND_GAP = 100;
+const SEND_GAP = 300;
+
+const robots = [0, 1, 2, 3];
 
 class App extends Component {
   state = {
-    direction: "stay", // (stay, up, right, down, left)
-    status: "connecting"
-  };
-
-  sendInterval = null;
-
-  sendActions = () => {
-    const { direction } = this.state;
-    this.conn.send(direction);
-    console.log("send", direction);
+    status: "connecting",
+    robotId: robots[0]
   };
 
   componentDidMount() {
+    // this.conn = new WebSocket("ws://192.168.43.54:9000");
     this.conn = new WebSocket("ws://" + window.location.hostname + ":9000");
+    //this.conn = new WebSocket("wss://echo.websocket.org");
 
     this.conn.onopen = () => {
       this.setState({ status: "connected" });
-      this.sendInterval = setInterval(this.sendActions, SEND_GAP);
     };
 
     this.conn.onclose = () => {
       this.setState({ status: "closed" });
-      clearInterval(this.sendInterval);
     };
     this.conn.onerror = e => {
       this.setState({ status: "error" });
-      clearInterval(this.sendInterval);
     };
   }
+
+  sendDirection = direction => {
+    const { robotId } = this.state;
+    this.conn.send(`${robotId}:${direction}`);
+  };
 
   listener = manager => {
     manager.on("dir", (e, stick) => {
       if (stick.direction && stick.direction.angle) {
-        const direction = stick.direction.angle;
-        this.setState({ direction });
+        this.sendDirection(stick.direction.angle);
       }
     });
     manager.on("end", () => {
-      const direction = "stay";
-      this.setState({ direction });
+      this.sendDirection("stay");
     });
   };
 
+  onRobotSelection = robotId => {
+    this.setState({ robotId });
+  };
+
   render() {
-    const { status } = this.state;
+    const { status, robotId } = this.state;
 
     const containerStyle = {
       display: "flex",
@@ -64,7 +64,21 @@ class App extends Component {
     return (
       <div>
         <div style={containerStyle}>
-          <div style={menuStyle}>{status}</div>
+          <div style={menuStyle}>
+            Status: {status}
+            {robots.map(id => (
+              <button
+                onClick={() => this.onRobotSelection(id)}
+                key={id}
+                style={{
+                  margin: "1em",
+                  color: id === robotId ? "red" : "black"
+                }}
+              >
+                Robot {id}
+              </button>
+            ))}
+          </div>
           {status === "connected" && <JoyStick listener={this.listener} />}
         </div>
       </div>
