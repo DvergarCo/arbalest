@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import nipplejs from "nipplejs";
-import JoyStick from "./Joystick";
+import JoyStick from "./Joystick2";
 
 // keep constant sending speed for webots
 const SEND_GAP = 300;
@@ -79,7 +79,7 @@ class App extends Component {
               </button>
             ))}
           </div>
-          {status === "connected" && <JoyStick listener={this.listener} />}
+          {status !== "connected" && <JoyStick listener={this.listener} />}
         </div>
       </div>
     );
