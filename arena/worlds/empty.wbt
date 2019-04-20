@@ -718,3 +718,10 @@ DEF CONTROLLER_SERVER Robot {
   synchronization FALSE
   cpuConsumption 100
 }
+DEF CONTROLLER_CLIENT Robot {
+  name "robot(7)"
+  controller "joystick_client"
+  supervisor TRUE
+  synchronization FALSE
+  cpuConsumption 100
+}
