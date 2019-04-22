@@ -9,6 +9,7 @@ from websocket import create_connection
 import sys
 import threading
 import time
+import math
 
 
 def setup_motors(robot, motor_names):
@@ -58,16 +59,16 @@ if __name__ == "__main__":
     while robot.step(timestep) != -1:
 
         message = ws.recv()
-        if message == "stay":
-            setAllMotors((0, 0, 0, 0))
-        elif message == "up":
-            setAllMotors((10, 10, 10, 10))
-        elif message == "down":
-            setAllMotors((-10, -10, -10, -10))
-        elif message == "left":
-            setAllMotors((10, 10, -10, -10))
-        elif message == "right":
-            setAllMotors((-10, -10, 10, 10))
+        (angle, force) = message.split("|")
+        angle = float(angle)
+        force = min(float(force), 1)
+
+        forward = math.sin(angle)
+        turn = math.cos(angle)
+
+        left = min(10*force*(0.8*forward - 0.6*turn), 10)
+        right = min(10*force*(0.8*forward + 0.6*turn), 10)
+        setAllMotors((left, left, right, right))
 
     print("Closing...")
     ws.close()

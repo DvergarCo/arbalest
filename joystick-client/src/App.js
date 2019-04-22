@@ -3,9 +3,12 @@ import nipplejs from "nipplejs";
 import JoyStick from "./Joystick";
 
 // keep constant sending speed for webots
-const SEND_GAP = 300;
+const SEND_INTERVAL = 150;
+const RECONNECT_TIMEOUT = 5000;
 
 const robots = [0, 1, 2, 3];
+
+document.body.style.margin = "0px";
 
 class App extends Component {
   state = {
@@ -13,36 +16,53 @@ class App extends Component {
     robotId: robots[0]
   };
 
+  angle = 0;
+  force = 0;
+  sender = null;
+  connecter = null;
+
   componentDidMount() {
-    // this.conn = new WebSocket("ws://192.168.43.54:9000");
+    this.connect();
+  }
+
+  connect = () => {
     this.conn = new WebSocket("ws://" + window.location.hostname + ":9000");
-    //this.conn = new WebSocket("wss://echo.websocket.org");
 
     this.conn.onopen = () => {
       this.setState({ status: "connected" });
+      clearTimeout(this.connecter);
+      this.sender = setInterval(this.sendDirection, SEND_INTERVAL);
     };
 
     this.conn.onclose = () => {
       this.setState({ status: "closed" });
+      clearInterval(this.sender);
+      this.connecter = setTimeout(this.connect, RECONNECT_TIMEOUT);
     };
+
     this.conn.onerror = e => {
       this.setState({ status: "error" });
+      clearInterval(this.sender);
+      this.connecter = setTimeout(this.connect, RECONNECT_TIMEOUT);
     };
-  }
+  };
 
-  sendDirection = direction => {
+  sendDirection = () => {
     const { robotId } = this.state;
-    this.conn.send(`${robotId}:${direction}`);
+    const { angle, force } = this;
+    if (this.conn) this.conn.send(`${robotId}:${angle}|${force}`);
   };
 
   listener = manager => {
-    manager.on("dir", (e, stick) => {
-      if (stick.direction && stick.direction.angle) {
-        this.sendDirection(stick.direction.angle);
+    manager.on("move", (e, stick) => {
+      if (stick.angle) {
+        this.angle = stick.angle.radian;
+        this.force = stick.force;
       }
     });
     manager.on("end", () => {
-      this.sendDirection("stay");
+      this.angle = 0;
+      this.force = 0;
     });
   };
 
@@ -58,27 +78,31 @@ class App extends Component {
       flexDirection: "column",
       position: "relative",
       width: "100%",
-      height: `${window.innerHeight}px`
+      height: "100vh",
+      boxSizing: "border-box",
+      padding: "0.5em"
     };
 
     return (
-      <div>
-        <div style={containerStyle}>
-          <div style={menuStyle}>
-            Status: {status}
-            {robots.map(id => (
-              <button
-                onClick={() => this.onRobotSelection(id)}
-                key={id}
-                style={{
-                  margin: "1em",
-                  color: id === robotId ? "red" : "black"
-                }}
-              >
-                Robot {id}
-              </button>
-            ))}
+      <div style={containerStyle}>
+        <div style={menuStyle}>
+          <div>
+            <div>Status: {status}</div>
           </div>
+          {robots.map(id => (
+            <button
+              onClick={() => this.onRobotSelection(id)}
+              key={id}
+              style={{
+                margin: "1em",
+                color: id === robotId ? "red" : "black"
+              }}
+            >
+              Robot {id}
+            </button>
+          ))}
+        </div>
+        <div style={joystickContainer}>
           {status === "connected" && <JoyStick listener={this.listener} />}
         </div>
       </div>
@@ -86,14 +110,11 @@ class App extends Component {
   }
 }
 
-const joyOptions = {
-  mode: "semi",
-  catchDistance: 150,
-  color: "#fff"
-};
-
-const joyStyle = {
-  flex: 1
+const joystickContainer = {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  position: "relative"
 };
 
 const menuStyle = {

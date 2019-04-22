@@ -9,8 +9,8 @@ class JoyStick extends Component {
 
   componentDidMount() {
     this.manager = nipplejs.create({
-      mode: "semi",
-      catchDistance: 150,
+      mode: "dynamic",
+      maxNumberOfNipples: 1,
       color: "#fff",
       zone: this.nippleRef.current
     });
@@ -24,7 +24,8 @@ class JoyStick extends Component {
 
 const joyStyle = {
   flex: 1,
-  background: "#000"
+  background: "#000",
+  borderRadius: "12px"
 };
 
 export default JoyStick;
