@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5786543092999941 0.719700967767636 0.38365310805840586 1.4631516139419563
-  position 6.139082766227538 8.985254600884073 2.844963917154689
+  orientation -0.5695830686916271 0.6077575332569937 0.5533587521935507 2.0059054529046594
+  position 1.0147472009411551 8.223110816386471 -0.29806613359413925
 }
 TexturedBackground {
   texture "noon_park_empty"
@@ -12,6 +12,7 @@ TexturedBackgroundLight {
 }
 DEF kedi Robot {
   translation 0 0.1 0.8100000000000003
+  scale 0.75 0.75 0.75
   children [
     DEF FL Transform {
       translation -0.125 -0.049999999999999996 -0.1
@@ -157,6 +158,7 @@ DEF kedi Robot {
 }
 DEF kedi Robot {
   translation 0.6000000000000003 0.1 0.7800000000000001
+  scale 0.75 0.75 0.75
   children [
     DEF FL Transform {
       translation -0.125 -0.049999999999999996 -0.1
@@ -302,6 +304,7 @@ DEF kedi Robot {
 }
 DEF kedi Robot {
   translation 0.7000000000000003 0.1 -0.1400000000000002
+  scale 0.75 0.75 0.75
   children [
     DEF FL Transform {
       translation -0.125 -0.049999999999999996 -0.1
@@ -448,6 +451,7 @@ DEF kedi Robot {
 }
 DEF kedi Robot {
   translation 0.020000000000000025 0.1 -0.0400000000000002
+  scale 0.75 0.75 0.75
   children [
     DEF FL Transform {
       translation -0.125 -0.049999999999999996 -0.1
@@ -659,9 +663,10 @@ DEF ARENA Group {
     DEF WALLS Group {
       children [
         Wall {
-          translation 1.5 0.1 -1.55
+          translation 1.4626794914910903 0.1 -1.2653589845047644
+          rotation 0 1 0 5.7595865139999995
           name "wall(4)"
-          size 1 0.1 0.1
+          size 1.25 0.1 0.1
           appearance Roughcast {
             colorOverride 1 0 0
             textureTransform TextureTransform {
@@ -670,10 +675,10 @@ DEF ARENA Group {
           }
         }
         Wall {
-          translation -1.55 0.1 1.5
-          rotation 0 1 0 1.5707963220000003
+          translation -1.2741154269648798 0.1 1.444641017755332
+          rotation 0 1 0 2.0943950960000004
           name "wall(5)"
-          size 1 0.1 0.1
+          size 1.25 0.1 0.1
           appearance Roughcast {
             colorOverride 0 0 1
             textureTransform TextureTransform {
@@ -692,15 +697,15 @@ DEF ARENA Group {
           size 0.5 0.5 0.02
         }
         Wall {
-          translation -1.5 0 -1.75
+          translation -0.5100000000000001 0 -1.75
           name "wall(2)"
-          size 1 0.5 0.5
+          size 3 0.5 0.5
         }
         Wall {
-          translation -1.75 0 -1.5
+          translation -1.7499965992242752 0 -0.49000000000572513
           rotation 0 1 0 1.5707996938995747
           name "wall(3)"
-          size 1 0.5 0.5
+          size 3 0.5 0.5
         }
       ]
     }
