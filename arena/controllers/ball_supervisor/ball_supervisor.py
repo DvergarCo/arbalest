@@ -30,8 +30,8 @@ def makeball(x, y):
 
 def showScore():
     global redScore, blueScore
-    robot.setLabel(0, "Red " + str(redScore) , 0, 0, 0.2, 0x0000ff, 0)
-    robot.setLabel(1, "Blue " + str(blueScore) , 0, 0.1, 0.2, 0xff0000, 0)
+    robot.setLabel(0, "Red " + str(redScore) , 0, 0, 0.2, 0xff0000, 0)
+    robot.setLabel(1, "Blue " + str(blueScore) , 0, 0.1, 0.2, 0x0000ff, 0)
     
 
 def killball():
