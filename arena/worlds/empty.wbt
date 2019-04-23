@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.4968513975237701 0.8403863259539172 0.216539862215604 0.909808242825684
-  position 5.471822246361642 3.9076941177920403 5.715394127745519
+  orientation -0.5786543092999941 0.719700967767636 0.38365310805840586 1.4631516139419563
+  position 6.139082766227538 8.985254600884073 2.844963917154689
 }
 TexturedBackground {
   texture "noon_park_empty"
@@ -592,6 +592,67 @@ DEF kedi Robot {
   cpuConsumption 100
 }
 DEF BALLS Group {
+  children [
+    Ball {
+      translation -1.3500000000000012 0.3124999999999997 0.15
+      radius 0.036
+    }
+    Ball {
+      translation -1.3600000000000012 0.3124999999999997 0.6100000000000003
+      name "ball(1)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.7400000000000007 0.3124999999999997 0.5900000000000003
+      name "ball(2)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.7300000000000006 0.3124999999999997 0.14000000000000007
+      name "ball(3)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.5100000000000005 0.3124999999999997 -1.3100000000000007
+      name "ball(4)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.5500000000000005 0.3124999999999997 -0.7900000000000003
+      name "ball(5)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.08000000000000028 0.3124999999999997 -0.8300000000000003
+      name "ball(6)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.020000000000000275 0.3124999999999997 -1.2800000000000007
+      name "ball(7)"
+      radius 0.036
+    }
+    Ball {
+      translation -1.3000000000000012 0.3124999999999997 -0.2699999999999998
+      name "ball(8)"
+      radius 0.036
+    }
+    Ball {
+      translation -0.7900000000000007 0.3124999999999997 -0.31999999999999984
+      name "ball(11)"
+      radius 0.036
+    }
+    Ball {
+      translation 0.4999999999999999 0.3124999999999997 -0.8300000000000003
+      name "ball(9)"
+      radius 0.036
+    }
+    Ball {
+      translation 0.5099999999999999 0.3124999999999997 -1.3300000000000007
+      name "ball(10)"
+      radius 0.036
+    }
+  ]
 }
 DEF ARENA Group {
   children [
