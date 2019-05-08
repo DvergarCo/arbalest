@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import nipplejs from "nipplejs";
 import JoyStick from "./Joystick";
+import TankContorl from "./TankControl";
+import SimpleButton from "./SimpleButton";
 
 // keep constant sending speed for webots
+// webots lags, if interval is too high
 const SEND_INTERVAL = 150;
 const RECONNECT_TIMEOUT = 5000;
 
@@ -13,11 +15,12 @@ document.body.style.margin = "0px";
 class App extends Component {
   state = {
     status: "connecting",
-    robotId: robots[0]
+    robotId: robots[0],
+    tankControls: true
   };
 
-  angle = 0;
-  force = 0;
+  left = 0;
+  right = 0;
   sender = null;
   connecter = null;
 
@@ -49,66 +52,105 @@ class App extends Component {
 
   sendDirection = () => {
     const { robotId } = this.state;
-    const { angle, force } = this;
-    if (this.conn) this.conn.send(`${robotId}:${angle}|${force}`);
+    const { left, right } = this;
+    if (this.conn) this.conn.send(`${robotId}:${left}|${right}`);
   };
 
-  listener = manager => {
+  joystickListener = manager => {
     manager.on("move", (e, stick) => {
       if (stick.angle) {
-        this.angle = stick.angle.radian;
-        this.force = stick.force;
+        const angle = stick.angle.radian;
+        const force = Math.min(stick.force, 1);
+        const forward = Math.sin(angle);
+        const turn = Math.cos(angle);
+
+        this.left = Math.min(0.8 * forward - 0.6 * turn, 1);
+        this.right = Math.min(force * (0.8 * forward + 0.6 * turn), 1);
       }
     });
     manager.on("end", () => {
-      this.angle = 0;
-      this.force = 0;
+      this.left = 0;
+      this.right = 0;
     });
+  };
+
+  tankListener = ({ left, right }) => {
+    this.left = left;
+    this.right = right;
   };
 
   onRobotSelection = robotId => {
     this.setState({ robotId });
   };
 
-  render() {
-    const { status, robotId } = this.state;
+  onTankControlPress = () => {
+    this.setState({ tankControls: true });
+  };
 
-    const containerStyle = {
-      display: "flex",
-      flexDirection: "column",
-      position: "relative",
-      width: "100%",
-      height: "100vh",
-      boxSizing: "border-box",
-      padding: "0.5em"
-    };
+  onJoystickControlPress = () => {
+    this.setState({ tankControls: false });
+  };
+
+  render() {
+    const { status, robotId, tankControls } = this.state;
 
     return (
-      <div style={containerStyle}>
+      <div style={mainContainer}>
         <div style={menuStyle}>
-          <div>
-            <div>Status: {status}</div>
+          <div style={statusContainer}>
+            <div style={{ flex: 2, fontSize: 12 }}>Status: {status}</div>
           </div>
+
           {robots.map(id => (
-            <button
+            <SimpleButton
               onClick={() => this.onRobotSelection(id)}
               key={id}
               style={{
-                margin: "1em",
                 color: id === robotId ? "red" : "black"
               }}
-            >
-              Robot {id}
-            </button>
+              text={`Robot ${id}`}
+            />
           ))}
+          <SimpleButton
+            onClick={this.onTankControlPress}
+            isOn={tankControls}
+            text="Tank"
+          />
+          <SimpleButton
+            onClick={this.onJoystickControlPress}
+            isOn={!tankControls}
+            text="Joystick"
+          />
         </div>
+
         <div style={joystickContainer}>
-          {status === "connected" && <JoyStick listener={this.listener} />}
+          {tankControls ? (
+            <TankContorl listener={this.tankListener} />
+          ) : (
+            <JoyStick listener={this.joystickListener} />
+          )}
         </div>
       </div>
     );
   }
 }
+
+const mainContainer = {
+  display: "flex",
+  flexDirection: "column",
+  position: "relative",
+  width: "100%",
+  height: "100vh",
+  boxSizing: "border-box",
+  padding: "0.5em"
+};
+
+const statusContainer = {
+  flex: 1,
+  display: "flex",
+  marginLeft: "1em",
+  marginRight: "1em"
+};
 
 const joystickContainer = {
   flex: 1,

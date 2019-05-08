@@ -59,15 +59,11 @@ if __name__ == "__main__":
     while robot.step(timestep) != -1:
 
         message = ws.recv()
-        (angle, force) = message.split("|")
-        angle = float(angle)
-        force = min(float(force), 1)
-
-        forward = math.sin(angle)
-        turn = math.cos(angle)
-
-        left = min(10*force*(0.8*forward - 0.6*turn), 10)
-        right = min(10*force*(0.8*forward + 0.6*turn), 10)
+        (left, right) = message.split("|")
+        left = float(left)
+        right = float(right)
+        left *= 10
+        right *= 10
         setAllMotors((left, left, right, right))
 
     print("Closing...")
