@@ -2,7 +2,7 @@
 
 # You may need to import some classes of the controller module. Ex:
 #  from controller import Robot, LED, DistanceSensor
-from controller import Robot
+from robot_control_wrapper import get_robot
 
 #from bluetooth import *
 
@@ -76,7 +76,7 @@ def keyboard_controls(keyboard, motors, keys_speeds):
 if __name__ == "__main__":
     cli_sck = setup_bluetooth()
     
-    robot = Robot()
+    robot = get_robot()
     timestep = int(robot.getBasicTimeStep())
     keyboard = robot.getKeyboard()
     keyboard.enable(timestep)
