@@ -64,7 +64,7 @@ if __name__ == "__main__":
         right = float(right)
         left *= 10
         right *= 10
-        setAllMotors((left, left, right, right))
+        setAllMotors((right, right, left, left))
 
     print("Closing...")
     ws.close()
