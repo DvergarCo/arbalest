@@ -64,8 +64,8 @@ class App extends Component {
         const forward = Math.sin(angle);
         const turn = Math.cos(angle);
 
-        this.left = Math.min(0.8 * forward - 0.6 * turn, 1);
-        this.right = Math.min(force * (0.8 * forward + 0.6 * turn), 1);
+        this.right = Math.min(0.8 * forward - 0.6 * turn, 1);
+        this.left = Math.min(force * (0.8 * forward + 0.6 * turn), 1);
       }
     });
     manager.on("end", () => {
@@ -97,17 +97,11 @@ class App extends Component {
     return (
       <div style={mainContainer}>
         <div style={menuStyle}>
-          <div style={statusContainer}>
-            <div style={{ flex: 2, fontSize: 12 }}>Status: {status}</div>
-          </div>
-
           {robots.map(id => (
             <SimpleButton
               onClick={() => this.onRobotSelection(id)}
               key={id}
-              style={{
-                color: id === robotId ? "red" : "black"
-              }}
+              isOn={id === robotId}
               text={`Robot ${id}`}
             />
           ))}
@@ -122,12 +116,17 @@ class App extends Component {
             text="Joystick"
           />
         </div>
-
         <div style={joystickContainer}>
-          {tankControls ? (
-            <TankContorl listener={this.tankListener} />
+          {status === "connected" ? (
+            tankControls ? (
+              <TankContorl listener={this.tankListener} />
+            ) : (
+              <JoyStick listener={this.joystickListener} />
+            )
           ) : (
-            <JoyStick listener={this.joystickListener} />
+            <div style={statusContainer}>
+              <div style={statusText}>{status}</div>
+            </div>
           )}
         </div>
       </div>
@@ -143,6 +142,13 @@ const mainContainer = {
   height: "100vh",
   boxSizing: "border-box",
   padding: "0.5em"
+};
+
+const statusText = {
+  flex: 1,
+  fontSize: 12,
+  textAlign: "center",
+  margin: "auto"
 };
 
 const statusContainer = {
@@ -161,6 +167,8 @@ const joystickContainer = {
 
 const menuStyle = {
   flex: 0,
+  display: "flex",
+  flexWrap: "wrap",
   margin: "0.5em",
   background: "#fff"
 };
