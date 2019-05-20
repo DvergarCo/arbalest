@@ -1,0 +1,6 @@
+[submodule "arena/controllers/4wheel_diff_drive/robotUprising"]
+	path = arena/controllers/4wheel_diff_drive/robotUprising
+	url = https://github.com/semihiseri/robotUprising
+[submodule "1stChallenge/controllers/4wheel_diff_drive/robotUprising"]
+	path = 1stChallenge/controllers/4wheel_diff_drive/robotUprising
+	url = https://github.com/semihiseri/robotUprising
