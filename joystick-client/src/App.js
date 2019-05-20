@@ -12,7 +12,7 @@ const robots = [0, 1, 2, 3];
 
 document.body.style.margin = "0px";
 
-class App extends Component {
+class App extends Component { 
   state = {
     status: "connecting",
     robotId: robots[0],

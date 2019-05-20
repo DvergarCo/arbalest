@@ -70,7 +70,7 @@ def ballmaker():
     
     currentTime = robot.getTime()
     
-    if currentTime-prevBallTime>10 and ballCount < 30:
+    if currentTime-prevBallTime>30 and ballCount < 3:
         makeball(1.5, 1.2) # add how many you want!
         makeball(1.2, 1.5) # add how many you want!
         prevBallTime = currentTime
