@@ -5,11 +5,6 @@ Viewpoint {
   orientation -0.9465843569742055 0.30348532699818687 0.10897114952377727 0.6643245222177476
   position 0.8159597388969122 3.4546515910212805 4.8713094307301095
 }
-DEF sv Robot {
-  name "robot(1)"
-  controller "movement_supervisor"
-  supervisor TRUE
-}
 TexturedBackground {
 }
 TexturedBackgroundLight {
@@ -36,7 +31,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 2.494839006487862e-10 -2.494846033053209e-10 1 1.570799693899574
+            rotation 4.0863811112219076e-10 -4.0863934966851424e-10 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -67,7 +62,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.8500822678872833e-10 -1.850087123485545e-10 1 1.570799693899574
+            rotation 3.155066726845784e-10 -3.155075976470719e-10 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -99,7 +94,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 1.8502403012851045e-10 -1.8502451574154821e-10 1 1.570799693899574
+            rotation 3.155285488350958e-10 -3.155294738712487e-10 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -131,7 +126,7 @@ DEF kedi Robot {
             }
           ]
           endPoint Solid {
-            rotation 2.494672258175244e-10 -2.4946792841791306e-10 1 1.570799693899574
+            rotation 4.0861292070445485e-10 -4.0861415916595924e-10 1 1.570799693899574
             children [
               DEF wheel Shape {
                 appearance Appearance {
@@ -165,6 +160,7 @@ DEF kedi Robot {
   physics Physics {
   }
   controller "4wheel_diff_drive"
+  supervisor TRUE
 }
 DEF COINS Group {
 }
